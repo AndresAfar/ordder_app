@@ -26,7 +26,7 @@ Route::get('/orders', function () {
 */
 
 // vistas staff
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'Admin')->group(function () {
     Route::get('/staff', [StaffController::class, 'index'])->name('staff');
     Route::get('/create/staff', [StaffController::class, 'create'])->name('staff.create');
     Route::get('/staff/modified', [StaffController::class, 'edit'])->name('staff.edit');
