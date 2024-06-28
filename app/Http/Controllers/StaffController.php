@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 use app\Models\User;
 use App\Models\Roles;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
@@ -34,7 +38,26 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'identification' => ['required', 'string', 'max:30', 'unique:users,identification'],
+            'first_name' => ['required', 'string', 'max:45'],
+            'last_name' => ['required', 'string', 'max:45'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'rol_id_rol' => $request->rol_id,
+            'identification' => $request->identification,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        return redirect(route('staff', absolute: false));
     }
 
     /**
@@ -64,8 +87,12 @@ class StaffController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+
+        $user->delete();
+
+        return redirect()->route('staff.index')
+            ->with('success', 'User deleted successfully.');
     }
 }
