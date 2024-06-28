@@ -26,11 +26,18 @@
                         {{ __('Pedidos') }}
                     </x-nav-link>
                 </div>
-                @if (Auth::user()->hasRole('Admin'))    
+
+                <!-- Dropdown for Admin Management -->
+                @if (Auth::user()->hasRole('Admin'))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('staff')" :active="request()->routeIs('staff')">
-                            {{ __('Gestión Empleados') }}
-                        </x-nav-link>
+                        <x-dropdown-nav :trigger="__('Administrar')">
+                            <x-dropdown-link-nav :href="route('staff')" :active="request()->routeIs('staff')">
+                                {{ __('Usuarios') }}
+                            </x-dropdown-link-nav>
+                            <x-dropdown-link-nav :href="route('rol')" :active="request()->routeIs('rol')">
+                                {{ __('Roles') }}
+                            </x-dropdown-link-nav>
+                        </x-dropdown-nav>
                     </div>
                 @endif
             </div>
