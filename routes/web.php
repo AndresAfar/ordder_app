@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,17 @@ Route::middleware('auth', 'Admin')->group(function () {
     Route::post('/create/staff', [StaffController::class, 'store'])->name('staff.store');
     Route::patch('/staff', [StaffController::class, 'update'])->name('staff.update');
     Route::delete('/staff/{user}', [StaffController::class, 'destroy'])->name('staff.destroy');
+});
+
+// vistas staff
+Route::middleware('auth', 'Admin')->group(function () {
+    Route::get('/roles', [RoleController::class, 'index'])->name('rol');
+    Route::get('/create/role', [StaffController::class, 'create'])->name('rol.create');
+    Route::get('/staff/role', [StaffController::class, 'edit'])->name('rol.edit');
+
+    Route::post('/create/role', [StaffController::class, 'store'])->name('rol.store');
+    Route::patch('/role', [StaffController::class, 'update'])->name('rol.update');
+    Route::delete('/role/{user}', [StaffController::class, 'destroy'])->name('rol.destroy');
 });
 
 
