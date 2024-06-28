@@ -44,7 +44,7 @@
                                 <a href="{{ route('staff.edit', $user) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                 <form action="{{ route('staff.destroy', $user) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display:inline;">
                                     @csrf
-                                    @method('DELETE')
+                                    @method('delete')
                                     <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
                                 </form>
                             </x-table-cell>
