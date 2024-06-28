@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\Roles;
+
 class ProfileController extends Controller
 {
     /**
@@ -16,8 +18,10 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $roles = Roles::all(); // Obtener todos los roles desde la base de datos
         return view('profile.edit', [
             'user' => $request->user(),
+            'roles' => $roles,
         ]);
     }
 
