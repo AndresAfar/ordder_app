@@ -37,15 +37,15 @@ Route::middleware('auth', 'Admin')->group(function () {
     Route::delete('/staff/{user}', [StaffController::class, 'destroy'])->name('staff.destroy');
 });
 
-// vistas staff
+// vistas rol
 Route::middleware('auth', 'Admin')->group(function () {
     Route::get('/roles', [RoleController::class, 'index'])->name('rol');
-    Route::get('/create/role', [StaffController::class, 'create'])->name('rol.create');
-    Route::get('/staff/role', [StaffController::class, 'edit'])->name('rol.edit');
+    Route::get('/create/role', [RoleController::class, 'create'])->name('rol.create');
+    Route::get('/role/modified', [RoleController::class, 'edit'])->name('rol.edit');
 
-    Route::post('/create/role', [StaffController::class, 'store'])->name('rol.store');
-    Route::patch('/role', [StaffController::class, 'update'])->name('rol.update');
-    Route::delete('/role/{user}', [StaffController::class, 'destroy'])->name('rol.destroy');
+    Route::post('/create/role', [RoleController::class, 'store'])->name('rol.store');
+    Route::patch('/role', [RoleController::class, 'update'])->name('rol.update');
+    Route::delete('/role/{rol}', [RoleController::class, 'destroy'])->name('rol.destroy');
 });
 
 
