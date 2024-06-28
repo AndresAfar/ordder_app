@@ -56,4 +56,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Roles::class, 'rol_id_rol', 'id');
     }
+
+    //Función de validación rol de usuario
+    public function hasRole($role)
+    {
+        return $this->roles->role_name === $role;
+    }
 }
