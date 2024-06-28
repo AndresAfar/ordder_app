@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200 logo-class" alt="Logo de Orddo"/>
                     </a>
                 </div>
 
@@ -16,6 +16,23 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
+                        {{ __('Productos') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
+                        {{ __('Pedidos') }}
+                    </x-nav-link>
+                </div>
+                @if (Auth::user()->hasRole('Admin'))    
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('staff')" :active="request()->routeIs('staff')">
+                            {{ __('Gestión Empleados') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
