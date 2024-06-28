@@ -11,13 +11,19 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'rol_id_rol',
+        'identification',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -43,5 +49,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Define la relación con la tabla 'rol'
+    public function roles()
+    {
+        return $this->belongsTo(Roles::class, 'rol_id_rol', 'id');
     }
 }
