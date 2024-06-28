@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/create/staff', [StaffController::class, 'store'])->name('staff.store');
     Route::patch('/staff', [StaffController::class, 'update'])->name('staff.update');
-    Route::delete('/staff', [StaffController::class, 'destroy'])->name('staff.destroy');
+    Route::delete('/staff/{user}', [StaffController::class, 'destroy'])->name('staff.destroy');
 });
 
 
